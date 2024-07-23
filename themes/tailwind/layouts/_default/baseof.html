@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="{{ $.Site.LanguageCode | default "en" }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{- if .IsHome }}
+  <title>{{ .Site.Title }}</title>
+  <meta property="og:title" content="{{ .Site.Title }}" />
+  {{- else }}
+  <title>{{ .Title }} | {{ .Site.Title }}</title>
+  <meta property="og:title" content="{{ .Title }} | {{ .Site.Title }}" />
+  {{- end }}
+  {{- if .IsHome }}
+  <meta name="description" content="{{ .Site.Params.Description }}">
+  <meta property="og:description" content="{{ .Site.Params.Description }}" />
+  {{- else }}
+  <meta name="description" content="{{ .Params.Description }}">
+  <meta property="og:description" content="{{ .Params.Description }}" />
+  {{- end -}}
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/img/icons/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/svg+xml" href="/img/icons/favicon.svg" sizes="16x16" />
+  <link rel="apple-touch-icon" href="/img/icons/apple-touch-icon.png" sizes="180x180" />
+  <!-- Google fonts -->
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter&display=swap">
+  {{ with (templates.Defer (dict "key" "global")) }}
+    {{ $t := debug.Timer "tailwindcss" }}
+    {{ with resources.Get "css/styles.css" }}
+      {{ $opts := dict
+        "inlineImports" true
+        "optimize" (not hugo.IsDevelopment)
+      }}
+      {{ with . | css.TailwindCSS $opts }}
+        {{ if hugo.IsDevelopment }}
+          <link rel="stylesheet" href="{{ .RelPermalink }}" />
+        {{ else }}
+          {{ with . | minify | fingerprint }}
+            <link
+              rel="stylesheet"
+              href="{{ .RelPermalink }}"
+              integrity="{{ .Data.Integrity }}"
+              crossorigin="anonymous" />
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+    {{ $t.Stop }}
+  {{ end }}
+
+</head>
+
+<body class="my-10">
+  {{ partial "header.html" . -}}
+  {{ block "main" . }}{{- end -}}
+  {{ partial "footer.html" . -}}
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+{{ define "main" }}
+
+<section class="mt-0 lg:mt-20 w-full flex-col-reverse lg:flex-row items-center">
+  <div class="w-full h-full sm:flex-1 lg:ml-12 z-10 relative" data-sal="slide-up" data-sal-duration="1000">
+    <h1 class="lg:px-24 my-32 lg:m-0 lg:-mr-36 lg:leading-tight">We build top-notch custom web and mobile solutions</h1>
+    <a href="#mywork" aria-label="my work" class="absolute left-1/2 lg:-bottom-24 block animate-bounce w-6 h-6">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+    </a>
+  </div>
+</section>
+
+<section class="w-full my-48 flex items-center" id="mywork">
+  <h2 class="mx-auto my-16 uppercase">My Work</h2>
+  <div class="container -mx-8 flex flex-wrap">
+    {{ range first 6 (where $.Site.RegularPages "Type" "work").ByDate.Reverse }} {{ end }}
+    <a href="/work" class="mt-24 mx-auto btn">See all work</a>
+  </div>
+</section>
+
+<section data-bg="antique">
+  <div class="container px-6 py-32 px">
+    <h4 class="mb-12 uppercase">Things we do well</h4>
+    <div class="flex flex-col lg:flex-row flex-wrap">
+      <ul class="w-full lg:w-1/2 text-3xl font-extralight leading-loose">
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="100">Wordpress</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="200">Builder</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="300">Hugo/Eleventy</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="400">Gatsby</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="500">Webpack/Snowpack</li>
+      </ul>
+      <ul class="w-full lg:w-1/2 text-3xl font-extralight leading-loose">
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="600">Front-end Development</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="700">Web Design</li>
+        <li data-sal="slide-up" data-sal-duration="1000" data-sal-delay="800">UI/UX Design</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section data-bg="blue">
+  <div class="container min-h-screen px-6 py-48">
+    <h4 class="mb-16 uppercase">Our clients</h4>
+  </div>
+</section>
+{{ end }}
