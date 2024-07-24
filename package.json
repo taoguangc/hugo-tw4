@@ -10,6 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "@tailwindcss/cli": "^4.0.0-alpha.17",
+    "@tinacms/cli": "^1.5.50",
+    "@types/node": "^20.14.12",
     "tailwindcss": "^4.0.0-alpha.17"
+  },
+  "dependencies": {
+    "tinacms": "^2.0.0"
   }
 }
